@@ -12,11 +12,11 @@ mcp = FastMCP(description="Zoho DSR Tool to add DSR records in Zoho CRM")
 @mcp.tool()
 def create_dsr_record(activities:list[str]):
     """
-    Create a Daily Work Status Report record in Zoho People.
+    Create a Daily Work Status Report record in Zoho People take activities from the git logs commit messages.
     Parameters:
     - activities: List of activities to be recorded in the DSR.
     Example:
-        create_dsr_record(["Activity 1", "Activity 2", "Activity 3"])
+        create_dsr_record(["Message1", "Message2", "Message 3"])
     """
     headersList = {
         "Accept": "*/*",
@@ -65,11 +65,15 @@ def get_access_token():
 # This tool fetches the git status and log, useful for debugging or tracking changes.
 @mcp.tool()
 def get_git_status_and_log():
-    """Run 'git status' and 'git log' commands and return their outputs as strings."""
+    """Run 'git status' and 'git log' commands and return their outputs as strings.
+        returns:
+        - A string containing the output of 'git log' followed by 'git status'.
+    """
+
     status = subprocess.check_output(["git", "status"], text=True)
-    return status + "\n\n" + status
+    log = subprocess.check_output(["git", "log"], text=True)
+    return log + "\n\n" + status
 
 
 if __name__ == "__main__":
     mcp.run(transport="stdio")
-
