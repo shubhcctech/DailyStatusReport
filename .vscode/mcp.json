@@ -1,0 +1,13 @@
+{
+	"servers": {
+		"add": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"E:\\MCP\\DRS\\drs.py"
+			]
+		}
+	},
+	"inputs": []
+}
